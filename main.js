@@ -3,8 +3,24 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const heartBtns = document.querySelectorAll(".like-glyph");
+
+function likeCallback(event) {
+  const heart = event.target;
+  mimicServerCall("someURL")
+  .then(function() {
+    if (heart.textContent === EMPTY_HEART) {
+      heart.textContent = FULL_HEART;
+    } else {
+      heart.textContent = EMPTY_HEART;
+    }
+  })
+}
 
 
+for (const heartBtn of heartBtns) {
+  heartBtn.addEventListener("click", likeCallback);
+}
 
 
 //------------------------------------------------------------------------------
@@ -23,3 +39,4 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
     }, 300);
   });
 }
+
